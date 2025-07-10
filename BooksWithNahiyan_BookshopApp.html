@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookshop Rating App by Books With Nahiyan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    .title {
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1.5em;
+      color: #4CAF50;
+      font-weight: bold;
+      margin-top: 0;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 1.4em;
+      font-weight: bold;
+      text-align: center;
+      color: #2E8B57;
+      background-color: #f0fff0;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      display: none;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="title">Bookshop Rating App</div>
+  <div class="subtitle">Books With Nahiyan</div>
+
+  <form id="ratingForm">
+    <label>Book Collection & Curation</label>
+    <input type="number" name="collection" min="0" max="10" required />
+
+    <label>Pricing & Value</label>
+    <input type="number" name="pricing" min="0" max="10" required />
+
+    <label>Atmosphere & Aesthetics</label>
+    <input type="number" name="atmosphere" min="0" max="10" required />
+
+    <label>Staff & Service</label>
+    <input type="number" name="staff" min="0" max="10" required />
+
+    <label>Accessibility & Space Use</label>
+    <input type="number" name="accessibility" min="0" max="10" required />
+
+    <label>Freedom to Document (📸)</label>
+    <input type="number" name="freedom" min="0" max="10" required />
+
+    <label>Respect for Privacy & Presence</label>
+    <input type="number" name="privacy" min="0" max="10" required />
+
+    <label>Special Features</label>
+    <input type="number" name="features" min="0" max="10" required />
+
+    <label>Personal Connection & Joy</label>
+    <input type="number" name="personal" min="0" max="10" required />
+
+    <button type="submit">Calculate Rating</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const weights = {
+      collection: 18,
+      pricing: 10,
+      atmosphere: 10,
+      staff: 10,
+      accessibility: 5,
+      freedom: 10,
+      privacy: 10,
+      features: 7,
+      personal: 20
+    };
+
+    document.getElementById("ratingForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const form = e.target;
+      let total = 0;
+      for (const key in weights) {
+        const score = parseFloat(form.elements[key].value);
+        if (!isNaN(score)) {
+          total += (score * weights[key]) / 100;
+        }
+      }
+      const resultDiv = document.getElementById("result");
+      resultDiv.textContent = `⭐ Overall Bookshop Rating: ${total.toFixed(2)} / 10`;
+      resultDiv.style.display = "block";
+    });
+  </script>
+</body>
+</html>
